@@ -11,3 +11,4 @@ b~*.adb
 
 openid
 test_betai
+test_coordinate_transformations

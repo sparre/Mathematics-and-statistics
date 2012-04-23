@@ -9,7 +9,7 @@ b__*.adb
 b~*.ads
 b~*.adb
 
-openid
 test_betai
 test_coordinate_transformations
 test_students_t_test
+test_students_t_test_on_measurements

@@ -10,6 +10,9 @@
 --  1997.03.19 (Jacob Sparre Andersen)
 --    Written.
 --
+--  2012.04.24 (Jacob Sparre Andersen)
+--    Removed superfluous comment.
+--
 --  (Insert additional update information above this line.)
 ------------------------------------------------------------------------------
 
@@ -40,8 +43,7 @@ procedure Test_Floating_Point_Statistics is
 
    Stats : Object;
    Value : Float;
-
-begin --  Test_Floating_Point_Statistics
+begin
    loop
       Put ("Data: ");
       Get (Value);

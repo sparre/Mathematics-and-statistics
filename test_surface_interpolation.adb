@@ -19,6 +19,9 @@
 --  2000.03.15 (Jacob Sparre Andersen)
 --    Written.
 --
+--  2012.04.24 (Jacob Sparre Andersen)
+--    Removed superfluous comment.
+--
 ------------------------------------------------------------------------------
 --  Standard packages:
 
@@ -62,7 +65,7 @@ procedure Test_Surface_Interpolation is
    Bottom, Top     : Float;
    Height          : Float;
 
-begin --  Test_Surface_Interpolation
+begin
 
 Read_Data_Points:
    loop

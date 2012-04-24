@@ -10,6 +10,9 @@
 --  2000.03.13 (Jacob Sparre Andersen)
 --    Written.
 --
+--  2012.04.24 (Jacob Sparre Andersen)
+--    Removed superfluous comment.
+--
 ------------------------------------------------------------------------------
 
 package body Generic_Surface_Interpolation is
@@ -36,11 +39,9 @@ package body Generic_Surface_Interpolation is
       --  the neighbouring points.
 
       procedure Adjust (X, Y : in Integer) is
-
          Sum   : Scalar := 0.0;
          Count : Natural := 0;
-
-      begin --  Adjust
+      begin
          if X in Height_Field'Range (1) and then
             Y in Height_Field'Range (2) then
 

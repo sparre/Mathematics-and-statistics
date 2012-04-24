@@ -11,6 +11,9 @@
 --  1997.03.08 (Jacob Sparre Andersen)
 --    Written.
 --
+--  2012.04.24 (Jacob Sparre Andersen)
+--    Removed superfluous comments.
+--
 --  (Insert additional update information above this line.)
 ------------------------------------------------------------------------------
 
@@ -30,8 +33,7 @@ package body Generic_Float_Statistics is
 
    function "/" (Left  : in     Data;
                  Right : in     Positive) return Data is
-
-   begin --  "/"
+   begin
       return Left / Data (Right);
    end "/";
 
@@ -39,8 +41,7 @@ package body Generic_Float_Statistics is
    --  function Squared:
 
    function Squared (Item  : in     Data'Base) return Squared_Data'Base is
-
-   begin --  Squared
+   begin
       return Squared_Data (Item) ** 2;
    end Squared;
 
@@ -49,8 +50,7 @@ package body Generic_Float_Statistics is
 
    function "*" (Left  : in     Positive;
                  Right : in     Squared_Data) return Squared_Data is
-
-   begin --  "*"
+   begin
       return Squared_Data (Left) * Right;
    end "*";
 
@@ -60,8 +60,7 @@ package body Generic_Float_Statistics is
    function Squared_To_Integer (Left  : in     Squared_Data;
                                 Right : in     Positive)
      return Squared_Data is
-
-   begin --  Squared_To_Integer
+   begin
       return Left / Squared_Data (Right);
    end Squared_To_Integer;
 
@@ -69,11 +68,8 @@ package body Generic_Float_Statistics is
    --  function Square_Root:
 
    function Square_Root (Item : in Squared_Data'Base) return Data'Base is
-
-      use Elementary_Functions;
-
    begin
-      return Data'Base (Sqrt (Item));
+      return Data'Base (Elementary_Functions.Sqrt (Item));
    end Square_Root;
 
    ---------------------------------------------------------------------------

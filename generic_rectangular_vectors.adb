@@ -12,6 +12,9 @@
 --    Reformatted the header.
 --    Corrected a few bugs.
 --
+--  2012.04.24 (Jacob Sparre Andersen)
+--    Removed superfluous comments and blank lines.
+--
 --  (Insert additional update information above this line.)
 ------------------------------------------------------------------------------
 
@@ -134,16 +137,13 @@ package body Generic_Rectangular_Vectors is
    --  Various subroutines:
 
    function Length (Item : in Vector) return Scalar is
-
-   begin --  Length
+   begin
       return Elementary_Functions.Sqrt ( Squared_Length (Item));
    end Length;
 
    function Squared_Length (Item : in Vector) return Scalar is
-
       Result : Scalar := 0.0;
-
-   begin --  Squared_Length
+   begin
       for Index in Vector'Range loop
          Result := Result + Item (Index) ** 2;
       end loop;
@@ -152,44 +152,36 @@ package body Generic_Rectangular_Vectors is
    end Squared_Length;
 
    procedure Normalize (Item : in out Vector) is
-
-   begin --  Normalize
+   begin
       Item := Item / Length (Item);
    end Normalize;
 
    function Unit_Vector (Item : in Vector) return Vector is
-
-   begin --  Unit_Vector
+   begin
       return Item / Length (Item);
    end Unit_Vector;
 
    function Project (V  : in Vector;
                      On : in Vector) return Vector is
-
-   begin --  Project
+   begin
       return On * (V * On) / Squared_Length (On);
    end Project;
 
    function Mirror (Ray            : in Vector;
                     Surface_Normal : in Vector) return Vector is
-
-   begin --  Mirror
+   begin
       return Ray - 2.0 * Project (Ray, Surface_Normal);
    end Mirror;
 
    function Distance (A, B : in Point) return Scalar is
-
       pragma Inline (Distance);
-
-   begin --  Distance
+   begin
       return Length (A - B);
    end Distance;
 
    function Squared_Distance (A, B : in Point) return Scalar is
-
       pragma Inline (Squared_Distance);
-
-   begin --  Squared_Distance
+   begin
       return Squared_Length (A - B);
    end Squared_Distance;
 
@@ -198,11 +190,9 @@ package body Generic_Rectangular_Vectors is
    --  Image and Value:
 
    function Image (Item : in Vector) return String is
-
       use Ada.Strings.Unbounded;
 
       Result : Unbounded_String;
-
    begin
       Result := To_Unbounded_String ("(");
 
@@ -220,11 +210,9 @@ package body Generic_Rectangular_Vectors is
    end Image;
 
    function Image (Item : in Point) return String is
-
       use Ada.Strings.Unbounded;
 
       Result : Unbounded_String;
-
    begin
       Result := To_Unbounded_String ("(");
 
@@ -242,18 +230,14 @@ package body Generic_Rectangular_Vectors is
    end Image;
 
    function Value (Item : in String) return Vector is
-
       Result : Vector := Null_Vector;
-
-   begin --  Value
+   begin
       return Result;
    end Value;
 
    function Value (Item : in String) return Point is
-
       Result : Point := Origo;
-
-   begin --  Value
+   begin
       return Result;
    end Value;
 

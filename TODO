@@ -1,0 +1,5 @@
+The to-do list:
+* Straight-forward FFT implementation
+* Real-to-complex FFT implementation
+* Efficient matrix operations and storage (thick binding to LAPACK?)
+* (and in general copy more packages into version control)

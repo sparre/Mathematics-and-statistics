@@ -16,3 +16,4 @@ test_students_t_test
 test_students_t_test_on_measurements
 test_surface_interpolation
 mean_and_variance
+test_matrices

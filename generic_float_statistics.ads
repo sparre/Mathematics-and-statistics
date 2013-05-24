@@ -32,7 +32,6 @@ package Generic_Float_Statistics is
    ---------------------------------------------------------------------------
    --  function "/":
 
-   overriding
    function "/" (Left  : in     Data;
                  Right : in     Positive) return Data;
 
@@ -44,7 +43,6 @@ package Generic_Float_Statistics is
    ---------------------------------------------------------------------------
    --  function "*":
 
-   overriding
    function "*" (Left  : in     Positive;
                  Right : in     Squared_Data) return Squared_Data;
 

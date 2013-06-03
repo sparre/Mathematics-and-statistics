@@ -9,4 +9,23 @@ project Build is
                  "test_students_t_test",
                  "test_students_t_test_on_measurements",
                  "test_surface_interpolation");
+
+   package Builder is
+      for Default_Switches ("Ada") use ("-m");
+   end Builder;
+
+   package Compiler is
+      for Default_Switches ("Ada") use ("-fstack-check",
+                                        "-gnata",
+                                        "-gnatE",
+                                        "-gnatf",
+                                        "-gnato",
+                                        "-gnatv",
+                                        "-gnatwa",
+                                        "-gnaty3abcdefhiklmnoprstux",
+                                        "-Wall",
+                                        "-O2",
+                                        "-gnatn",
+                                        "-gnat2005");
+   end Compiler;
 end Build;

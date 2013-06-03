@@ -31,7 +31,7 @@ package Generic_Least_Squares is
    type Simple_Function is
      access function (Variable : in Scalar) return Scalar;
 
-   type Function_Array_Type is array (Positive range <>) of Simple_Function;
+   type Function_Array_Type is array (Integer range <>) of Simple_Function;
 
    ---------------------------------------------------------------------------
    --  procedure Gauss_Jordan:

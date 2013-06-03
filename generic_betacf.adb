@@ -1,24 +1,3 @@
-------------------------------------------------------------------------------
---
---  function Generic_Betacf (body)
---
---  Calculating the incomplete beta function - based on the example code on
---  pages 180 in "Numerical Recipes in C".
---
-------------------------------------------------------------------------------
---  Update information:
---
---  2005.05.16 (Jacob Sparre Andersen)
---    Written.
---
---  (Insert additional update information above this line.)
-------------------------------------------------------------------------------
---  Standard packages:
-
---with Ada.Numerics.Generic_Elementary_Functions;
-
-------------------------------------------------------------------------------
-
 function Generic_Betacf (A, B, X : Scalar) return Scalar is
    Qap, Qam, Qab, Em, Tem, D : Scalar;
    Bz                        : Scalar;
@@ -38,7 +17,7 @@ begin
       D := Em * (B - Em) * X / ((Qam + Tem) * (A + Tem));
       Ap := Az + D * Am;
       Bp := Bz + D * Bm;
-      D := - (A + Em) * (Qab + Em) * X / ((Qap + Tem) * (A + Tem));
+      D := -(A + Em) * (Qab + Em) * X / ((Qap + Tem) * (A + Tem));
       App := Ap + D * Az;
       Bpp := Bp + D * Bz;
       Aold := Az;
@@ -54,4 +33,3 @@ begin
 
    raise Constraint_Error;
 end Generic_Betacf;
-

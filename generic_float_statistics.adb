@@ -21,32 +21,9 @@ with Ada.Numerics.Generic_Elementary_Functions;
 
 package body Generic_Float_Statistics is
 
-   ---------------------------------------------------------------------------
-   --  package Elementary_Functions:
-
    package Elementary_Functions is
      new Ada.Numerics.Generic_Elementary_Functions
        (Float_Type => Squared_Data);
-
-   ---------------------------------------------------------------------------
-   --  function "/":
-
-   function "/" (Left  : in     Data;
-                 Right : in     Positive) return Data is
-   begin
-      return Left / Data (Right);
-   end "/";
-
-   ---------------------------------------------------------------------------
-   --  function Squared:
-
-   function Squared (Item  : in     Data'Base) return Squared_Data'Base is
-   begin
-      return Squared_Data (Item) ** 2;
-   end Squared;
-
-   ---------------------------------------------------------------------------
-   --  function "*":
 
    function "*" (Left  : in     Positive;
                  Right : in     Squared_Data) return Squared_Data is
@@ -54,8 +31,21 @@ package body Generic_Float_Statistics is
       return Squared_Data (Left) * Right;
    end "*";
 
-   ---------------------------------------------------------------------------
-   --  function Squared_To_Integer:
+   function "/" (Left  : in     Data;
+                 Right : in     Positive) return Data is
+   begin
+      return Left / Data (Right);
+   end "/";
+
+   function Square_Root (Item : in Squared_Data'Base) return Data'Base is
+   begin
+      return Data'Base (Elementary_Functions.Sqrt (Item));
+   end Square_Root;
+
+   function Squared (Item  : in     Data'Base) return Squared_Data'Base is
+   begin
+      return Squared_Data (Item) ** 2;
+   end Squared;
 
    function Squared_To_Integer (Left  : in     Squared_Data;
                                 Right : in     Positive)
@@ -63,15 +53,5 @@ package body Generic_Float_Statistics is
    begin
       return Left / Squared_Data (Right);
    end Squared_To_Integer;
-
-   ---------------------------------------------------------------------------
-   --  function Square_Root:
-
-   function Square_Root (Item : in Squared_Data'Base) return Data'Base is
-   begin
-      return Data'Base (Elementary_Functions.Sqrt (Item));
-   end Square_Root;
-
-   ---------------------------------------------------------------------------
 
 end Generic_Float_Statistics;

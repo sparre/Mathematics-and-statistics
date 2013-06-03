@@ -22,14 +22,8 @@ with Generic_Gauss_Jordan;
 
 package body Generic_Parabola_Fit is
 
-   ---------------------------------------------------------------------------
-   --  procedure Gauss_Jordan:
-
    procedure Gauss_Jordan is new Generic_Gauss_Jordan (Scalar   => Scalar,
                                                        Matrices => Matrices);
-
-   ---------------------------------------------------------------------------
-   --  function Fit:
 
    function Fit (Data : in Data_Array) return Weight_Array is
 
@@ -51,8 +45,6 @@ package body Generic_Parabola_Fit is
               1 => Element (Buffer, 2, 1),
               2 => Element (Buffer, 3, 1));
    end Fit;
-
-   ---------------------------------------------------------------------------
 
    use Matrices;
 

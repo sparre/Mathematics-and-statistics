@@ -31,7 +31,7 @@ package Generic_Matrices is
    --  Matrix types:
 
    type Column (N    : Positive) is private;
-   type Row    (   M : Positive) is private;
+   type Row       (M : Positive) is private;
    type Matrix (N, M : Positive) is private;
 
    ---------------------------------------------------------------------------
@@ -133,16 +133,16 @@ package Generic_Matrices is
    ---------------------------------------------------------------------------
    --  Comparisons:
 
-   function "=" (Left  : in Matrix;   
+   function "=" (Left  : in Matrix;
                  Right : in Column) return Boolean;
 
-   function "=" (Left  : in Matrix;   
+   function "=" (Left  : in Matrix;
                  Right : in Row) return Boolean;
 
-   function "=" (Left  : in Matrix;   
+   function "=" (Left  : in Matrix;
                  Right : in Scalar) return Boolean;
 
-   function "=" (Left  : in Column;   
+   function "=" (Left  : in Column;
                  Right : in Matrix) return Boolean;
 
    function "=" (Left  : in Column;
@@ -161,7 +161,7 @@ package Generic_Matrices is
                  Right : in Scalar) return Boolean;
 
    ---------------------------------------------------------------------------
-   --  function Image:
+   --  Images:
 
    function Image (Value : in Column) return String;
 

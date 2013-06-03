@@ -47,6 +47,11 @@ procedure Test_Matrices is
    procedure Search_And_Replace
      (Source     : in out Ada.Strings.Unbounded.Unbounded_String;
       Pattern    : in     String;
+      Replace_By : in     String);
+
+   procedure Search_And_Replace
+     (Source     : in out Ada.Strings.Unbounded.Unbounded_String;
+      Pattern    : in     String;
       Replace_By : in     String) is
       Location   : Natural;
    begin --  Search_And_Replace
@@ -95,6 +100,8 @@ procedure Test_Matrices is
    ---------------------------------------------------------------------------
    --  procedure Put_Line:
 
+   procedure Put_Line (Item : in     Matrix);
+
    procedure Put_Line (Item : in     Matrix) is
       use Ada.Strings.Unbounded;
 
@@ -114,15 +121,15 @@ procedure Test_Matrices is
                                     To_Row ((0.0, 1.0, 0.0)) &
                                     To_Row ((0.0, 0.0, 1.0));
 
-   A : Matrix := To_Row (( 1.0,  2.0,  3.0)) &
-                 To_Row (( 4.0,  5.0, -1.0)) &
-                 To_Row ((-2.0, -3.0, -4.0));
+   A :          Matrix := To_Row ((+1.0,  2.0,  3.0)) &
+                          To_Row ((+4.0,  5.0, -1.0)) &
+                          To_Row ((-2.0, -3.0, -4.0));
 
-   B : Matrix := To_Row (( 1.0, -1.0,  2.0)) &
-                 To_Row ((-1.0,  1.0, -1.0)) &
-                 To_Row (( 1.0, -1.0,  1.0));
+   B : constant Matrix := To_Row ((+1.0, -1.0,  2.0)) &
+                          To_Row ((-1.0,  1.0, -1.0)) &
+                          To_Row ((+1.0, -1.0,  1.0));
 
-   C : Matrix (3, 1);
+   C :          Matrix (3, 1);
 
    ---------------------------------------------------------------------------
 
@@ -217,14 +224,12 @@ begin --  Test_Matrices
 
    declare
       use Ada.Float_Text_IO;
-      use Least_Squares;
-      use Matrices;
       use Float_Polynomial_Basis;
 
       x : Scalar_Array (1 .. 4) := (0.0, 1.1, 1.9, 3.1);
       y : Scalar_Array (1 .. 4) := (0.1, 1.0, 3.9, 9.2);
 
-      Basis   : Function_Array_Type (1 .. 3)
+      Basis   : constant Function_Array_Type (1 .. 3)
                   := (Order_0'Access, Order_1'Access, Order_2'Access);
       Weights : Scalar_Array (1 .. 3);
 

@@ -24,26 +24,6 @@
 
 package body Generic_Measurement_Values is
 
-   ---------------------------------------------------------------------------
-   --  function "-":
-
-   function "-" (Right : in Limit) return Limit is
-   begin
-      case Right is
-         when Below =>
-            return Above;
-         when Exact =>
-            return Exact;
-         when Above =>
-            return Below;
-         when Undefined =>
-            return Undefined;
-      end case;
-   end "-";
-
-   ---------------------------------------------------------------------------
-   --  function "+":
-
    function "+" (Left  : in Measurement;
                  Right : in Measurement) return Measurement is
    begin
@@ -92,9 +72,6 @@ package body Generic_Measurement_Values is
             return (As => Undefined);
       end case;
    end "+";
-
-   ---------------------------------------------------------------------------
-   --  function "+":
 
    function "+" (Left  : in Scalar;
                  Right : in Measurement) return Measurement is
@@ -114,9 +91,6 @@ package body Generic_Measurement_Values is
       end case;
    end "+";
 
-   ---------------------------------------------------------------------------
-   --  function "+":
-
    function "+" (Left  : in Measurement;
                  Right : in Scalar) return Measurement is
    begin
@@ -135,8 +109,19 @@ package body Generic_Measurement_Values is
       end case;
    end "+";
 
-   ---------------------------------------------------------------------------
-   --  function "-":
+   function "-" (Right : in Limit) return Limit is
+   begin
+      case Right is
+         when Below =>
+            return Above;
+         when Exact =>
+            return Exact;
+         when Above =>
+            return Below;
+         when Undefined =>
+            return Undefined;
+      end case;
+   end "-";
 
    function "-" (Left  : in Measurement;
                  Right : in Measurement) return Measurement is
@@ -187,9 +172,6 @@ package body Generic_Measurement_Values is
       end case;
    end "-";
 
-   ---------------------------------------------------------------------------
-   --  function "-":
-
    function "-" (Left  : in Scalar;
                  Right : in Measurement) return Measurement is
    begin
@@ -207,9 +189,6 @@ package body Generic_Measurement_Values is
             return (As => Undefined);
       end case;
    end "-";
-
-   ---------------------------------------------------------------------------
-   --  function "-":
 
    function "-" (Left  : in Measurement;
                  Right : in Scalar) return Measurement is
@@ -229,9 +208,6 @@ package body Generic_Measurement_Values is
       end case;
    end "-";
 
-   ---------------------------------------------------------------------------
-   --  function To_Scalar:
-
    function To_Scalar (Item : in Measurement) return Scalar is
    begin
       if Item.As = Exact then
@@ -240,7 +216,5 @@ package body Generic_Measurement_Values is
          raise Not_An_Exact_Measurement;
       end if;
    end To_Scalar;
-
-   ---------------------------------------------------------------------------
 
 end Generic_Measurement_Values;

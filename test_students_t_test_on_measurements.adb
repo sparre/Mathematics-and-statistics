@@ -14,9 +14,6 @@
 ------------------------------------------------------------------------------
 --  Standard packages:
 
-with Ada.Characters.Latin_1;
-with Ada.Numerics.Generic_Elementary_Functions;
-with Ada.Integer_Text_IO;
 with Ada.Text_IO;
 
 ------------------------------------------------------------------------------
@@ -68,7 +65,6 @@ procedure Test_Students_T_Test_On_Measurements is
 
    ---------------------------------------------------------------------------
 
-   use Ada.Integer_Text_IO;
    use Ada.Text_IO;
    use Measurement_T_Test;
    use Measurement_Text_IO;

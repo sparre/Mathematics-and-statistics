@@ -21,28 +21,9 @@ with Ada.Strings.Unbounded;
 
 package body Generic_Matrices is
 
-   ---------------------------------------------------------------------------
-   --  Constructors:
-
-   function To_Column (Item : in Scalar_Array) return Column is
-
-   begin --  To_Column
-      return Column'(N        => Item'Length,
-                     Elements => Item);
-   end To_Column;
-
-   function To_Row (Item : in Scalar_Array) return Row is
-
-   begin --  To_Row
-      return Row'(M        => Item'Length,
-                  Elements => Item);
-   end To_Row;
-
    function "&" (Left, Right : in Column) return Matrix is
-
       Result : Matrix (Height (Left), 2);
-
-   begin --  "&"
+   begin
       if Height (Left) = Height (Right) then
          for i in Result.Elements'Range (1) loop
             Result.Elements (i, 1) := Left.Elements (i);
@@ -57,10 +38,8 @@ package body Generic_Matrices is
 
    function "&" (Left  : in Matrix;
                  Right : in Column) return Matrix is
-
       Result : Matrix (Height (Left), Width (Left) + 1);
-
-   begin --  "&"
+   begin
       if Height (Left) = Height (Right) then
          for i in Left.Elements'Range (1) loop
             for j in Left.Elements'Range (2) loop
@@ -78,10 +57,8 @@ package body Generic_Matrices is
    end "&";
 
    function "&" (Top, Bottom : in Row) return Matrix is
-
       Result : Matrix (2, Width (Top));
-
-   begin --  "&"
+   begin
       if Width (Top) = Width (Bottom) then
          for j in Result.Elements'Range (2) loop
             Result.Elements (1, j) := Top.Elements (j);
@@ -96,10 +73,8 @@ package body Generic_Matrices is
 
    function "&" (Top    : in Matrix;
                  Bottom : in Row) return Matrix is
-
       Result : Matrix (Height (Top) + 1, Width (Top));
-
-   begin --  "&"
+   begin
       if Width (Top) = Width (Bottom) then
          for j in Top.Elements'Range (2) loop
             for i in Top.Elements'Range (1) loop
@@ -115,159 +90,6 @@ package body Generic_Matrices is
          raise Mismatching_Dimensions;
       end if;
    end "&";
-
-   ---------------------------------------------------------------------------
-   --  Extracting values:
-
-   function Element (Item : in Column;
-                     i    : in Positive) return Scalar is
-
-   begin
-      return Item.Elements (i);
-   end Element;
-
-   function Element (Item : in Column;
-                     i, j : in Positive) return Scalar is
-
-   begin
-      if j = 1 then
-         return Item.Elements (i);
-      else
-         raise Invalid_Column_Index;
-      end if;
-   end Element;
-
-   function Element (Item : in Row;
-                        j : in Positive) return Scalar is
-
-   begin
-      return Item.Elements (j);
-   end Element;
-
-   function Element (Item : in Row;
-                     i, j : in Positive) return Scalar is
-
-   begin
-      if i = 1 then
-         return Item.Elements (j);
-      else
-         raise Invalid_Row_Index;
-      end if;
-   end Element;
-
-   function Element (Item : in Matrix;
-                     i, j : in Positive) return Scalar is
-
-   begin
-      return Item.Elements (i, j);
-   end Element;
-
-   procedure Set (Item  : in out Matrix;
-                  i, j  : in     Positive;
-                  Value : in     Scalar) is
-
-   begin --  Set
-      Item.Elements (i, j) := Value;
-   end Set;
-
-   ---------------------------------------------------------------------------
-   --  Querying dimensions:
-
-   function Height (Item : in Column) return Positive is
-
-   begin
-      return Item.Elements'Length;
-   end Height;
-
-   function Width  (Item : in Column) return Positive is
-
-   begin
-      return 1;
-   end Width;
-
-   function Height (Item : in Row) return Positive is
-
-   begin
-      return 1;
-   end Height;
-
-   function Width  (Item : in Row) return Positive is
-
-   begin
-      return Item.Elements'Length;
-   end Width;
-
-   function Height (Item : in Matrix) return Positive is
-
-   begin
-      return Item.Elements'Length (1);
-   end Height;
-
-   function Width  (Item : in Matrix) return Positive is
-
-   begin
-      return Item.Elements'Length (2);
-   end Width;
-
-   ---------------------------------------------------------------------------
-   --  Arithmetics:
-
-   function "+" (Left  : in Matrix;
-                 Right : in Matrix) return Matrix is
-
-      Result : Matrix (N => Height (Left),
-                       M => Width (Left));
-
-   begin --  "+"
-      if Width (Left) = Width (Right) and Height (Left) = Height (Right) then
-         for i in Result.Elements'Range (1) loop
-            for j in Result.Elements'Range (2) loop
-               Result.Elements (i, j) := Left.Elements (i, j)
-                                           + Right.Elements (i, j);
-            end loop;
-         end loop;
-
-         return Result;
-      else
-         raise Mismatching_Dimensions;
-      end if;
-   end "+";
-
-   function "-" (Left  : in Matrix;
-                 Right : in Matrix) return Matrix is
-
-      Result : Matrix (N => Height (Left),
-                       M => Width (Left));
-
-   begin --  "-"
-      if Width (Left) = Width (Right) and Height (Left) = Height (Right) then
-         for i in Result.Elements'Range (1) loop
-            for j in Result.Elements'Range (2) loop
-               Result.Elements (i, j) := Left.Elements (i, j)
-                                           - Right.Elements (i, j);
-            end loop;
-         end loop;
-
-         return Result;
-      else
-         raise Mismatching_Dimensions;
-      end if;
-   end "-";
-
-   function "-" (Right : in Matrix) return Matrix is
-
-      Result : Matrix (N => Height (Right),
-                       M => Width (Right));
-
-   begin --  "-"
-      for i in Result.Elements'Range (1) loop
-         for j in Result.Elements'Range (2) loop
-            Result.Elements (i, j) := - Right.Elements (i, j);
-         end loop;
-      end loop;
-
-      return Result;
-   end "-";
 
    function "*" (Left  : in Matrix;
                  Right : in Matrix) return Matrix is
@@ -381,13 +203,66 @@ package body Generic_Matrices is
       end if;
    end "*";
 
-   function "/" (Left  : in Matrix;
-                 Right : in Scalar) return Matrix is
+   function "+" (Left  : in Matrix;
+                 Right : in Matrix) return Matrix is
 
       Result : Matrix (N => Height (Left),
-                       M => Width  (Left));
+                       M => Width (Left));
 
-   begin --  "/"
+   begin --  "+"
+      if Width (Left) = Width (Right) and Height (Left) = Height (Right) then
+         for i in Result.Elements'Range (1) loop
+            for j in Result.Elements'Range (2) loop
+               Result.Elements (i, j) := Left.Elements (i, j)
+                                           + Right.Elements (i, j);
+            end loop;
+         end loop;
+
+         return Result;
+      else
+         raise Mismatching_Dimensions;
+      end if;
+   end "+";
+
+   function "-" (Left  : in Matrix;
+                 Right : in Matrix) return Matrix is
+
+      Result : Matrix (N => Height (Left),
+                       M => Width (Left));
+
+   begin --  "-"
+      if Width (Left) = Width (Right) and Height (Left) = Height (Right) then
+         for i in Result.Elements'Range (1) loop
+            for j in Result.Elements'Range (2) loop
+               Result.Elements (i, j) := Left.Elements (i, j)
+                                           - Right.Elements (i, j);
+            end loop;
+         end loop;
+
+         return Result;
+      else
+         raise Mismatching_Dimensions;
+      end if;
+   end "-";
+
+   function "-" (Right : in Matrix) return Matrix is
+      Result : Matrix (N => Height (Right),
+                       M => Width  (Right));
+   begin
+      for i in Result.Elements'Range (1) loop
+         for j in Result.Elements'Range (2) loop
+            Result.Elements (i, j) := -Right.Elements (i, j);
+         end loop;
+      end loop;
+
+      return Result;
+   end "-";
+
+   function "/" (Left  : in Matrix;
+                 Right : in Scalar) return Matrix is
+      Result : Matrix (N => Height (Left),
+                       M => Width  (Left));
+   begin
       for i in Result.Elements'Range (1) loop
          for j in Result.Elements'Range (2) loop
             Result.Elements (i, j) := Left.Elements (i, j) / Right;
@@ -397,29 +272,8 @@ package body Generic_Matrices is
       return Result;
    end "/";
 
-   ---------------------------------------------------------------------------
-   --  Transposing:
-
-   function Transpose (Item : in Matrix) return Matrix is
-
-      Result : Matrix (N => Item.M, M => Item.N);
-
-   begin --  Transpose
-      for i in 1 .. Height (Item) loop
-         for j in 1 .. Width (Item) loop
-            Result.Elements (j, i) := Item.Elements (i, j);
-         end loop;
-      end loop;
-
-      return Result;
-   end Transpose;
-
-   ---------------------------------------------------------------------------
-   --  Comparisons:
-
    function "=" (Left  : in Matrix;
                  Right : in Column) return Boolean is
-
    begin
       if Width (Left) = Width (Right) and Height (Left) = Height (Right) then
          for i in 1 .. Height (Left) loop
@@ -556,8 +410,59 @@ package body Generic_Matrices is
       end if;
    end "=";
 
-   ---------------------------------------------------------------------------
-   --  function Image:
+   function Element (Item : in Column;
+                     i    : in Positive) return Scalar is
+   begin
+      return Item.Elements (i);
+   end Element;
+
+   function Element (Item : in Column;
+                     i, j : in Positive) return Scalar is
+   begin
+      if j = 1 then
+         return Item.Elements (i);
+      else
+         raise Invalid_Column_Index;
+      end if;
+   end Element;
+
+   function Element (Item : in Row;
+                        j : in Positive) return Scalar is
+   begin
+      return Item.Elements (j);
+   end Element;
+
+   function Element (Item : in Row;
+                     i, j : in Positive) return Scalar is
+   begin
+      if i = 1 then
+         return Item.Elements (j);
+      else
+         raise Invalid_Row_Index;
+      end if;
+   end Element;
+
+   function Element (Item : in Matrix;
+                     i, j : in Positive) return Scalar is
+   begin
+      return Item.Elements (i, j);
+   end Element;
+
+   function Height (Item : in Column) return Positive is
+   begin
+      return Item.Elements'Length;
+   end Height;
+
+   function Height (Item : in Row) return Positive is
+      pragma Unreferenced (Item);
+   begin
+      return 1;
+   end Height;
+
+   function Height (Item : in Matrix) return Positive is
+   begin
+      return Item.Elements'Length (1);
+   end Height;
 
    function Image (Value : in Column) return String is
 
@@ -604,12 +509,10 @@ package body Generic_Matrices is
    end Image;
 
    function Image (Value : in Matrix) return String is
-
       use Ada.Strings.Unbounded;
 
       Result : Unbounded_String := Null_Unbounded_String;
-
-   begin --  Image
+   begin
       for i in 1 .. Height (Value) loop
          if i = 1 then
             Append (Result, "(");
@@ -635,6 +538,52 @@ package body Generic_Matrices is
       return To_String (Result);
    end Image;
 
-   ---------------------------------------------------------------------------
+   procedure Set (Item  : in out Matrix;
+                  i, j  : in     Positive;
+                  Value : in     Scalar) is
+   begin
+      Item.Elements (i, j) := Value;
+   end Set;
+
+   function To_Column (Item : in Scalar_Array) return Column is
+   begin
+      return Column'(N        => Item'Length,
+                     Elements => Item);
+   end To_Column;
+
+   function To_Row (Item : in Scalar_Array) return Row is
+   begin
+      return Row'(M        => Item'Length,
+                  Elements => Item);
+   end To_Row;
+
+   function Transpose (Item : in Matrix) return Matrix is
+      Result : Matrix (N => Item.M, M => Item.N);
+   begin
+      for i in 1 .. Height (Item) loop
+         for j in 1 .. Width (Item) loop
+            Result.Elements (j, i) := Item.Elements (i, j);
+         end loop;
+      end loop;
+
+      return Result;
+   end Transpose;
+
+   function Width  (Item : in Column) return Positive is
+      pragma Unreferenced (Item);
+   begin
+      return 1;
+   end Width;
+
+   function Width  (Item : in Row) return Positive is
+   begin
+      return Item.Elements'Length;
+   end Width;
+
+   function Width  (Item : in Matrix) return Positive is
+
+   begin
+      return Item.Elements'Length (2);
+   end Width;
 
 end Generic_Matrices;

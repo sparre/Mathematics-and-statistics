@@ -30,7 +30,7 @@ procedure Generic_Gauss_Jordan (A : in out Matrices.Matrix;
    pivinv : Scalar;
 
    big        : Scalar;
-   irow, icol : Positive;
+   irow, icol : Positive := 1;
 
    dum : Scalar;
 
@@ -51,7 +51,7 @@ begin --  Generic_Gauss_Jordan
             if ipiv (j) /= 1 then
                for k in 1 .. n loop
                   if ipiv (k) = 0 then
-                     if Abs (Element (A, j, k)) >= big then
+                     if abs Element (A, j, k) >= big then
                         big := Element (A, j, k);
                         irow := j;
                         icol := k;
@@ -108,7 +108,7 @@ begin --  Generic_Gauss_Jordan
                end loop;
 
                for l in 1 .. m loop
-                  Set (B, ll, l, 
+                  Set (B, ll, l,
                        Element (B, ll, l) - Element (B, icol, l) * dum);
                end loop;
             end if;

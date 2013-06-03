@@ -33,41 +33,6 @@
 package body Generic_Statistics is
 
    ---------------------------------------------------------------------------
-   --  procedure Append_Value:
-   --
-   --  Exceptions:
-   --    Constraint_Error - when the number of data points exceeds the
-   --                       declared limit.
-
-   procedure Append_Value (Target : in out Object;
-                           Value  : in     Data) is
-   begin
-      Target :=
-        (Count               => Target.Count + 1,
-         Sum_Of_Data         => Target.Sum_Of_Data + Value,
-         Sum_Of_Squared_Data => Target.Sum_Of_Squared_Data + Squared (Value));
-   end Append_Value;
-
-   ---------------------------------------------------------------------------
-   --  procedure Remove_Value:
-   --
-   --  Exceptions:
-   --    Constraint_Error - when the number of data points is 0.
-
-   procedure Remove_Value (Target : in out Object;
-                           Value  : in     Data) is
-   begin
-      if Target.Count < 1 then
-         raise Not_Enough_Data_Points;
-      else
-         Target :=
-           (Count               => Target.Count - 1,
-            Sum_Of_Data         => Target.Sum_Of_Data - Value,
-            Sum_Of_Squared_Data => Target.Sum_Of_Squared_Data - Squared (Value));
-      end if;
-   end Remove_Value;
-
-   ---------------------------------------------------------------------------
    --  procedure Append:
    --
    --  Exceptions:
@@ -86,6 +51,22 @@ package body Generic_Statistics is
    end Append;
 
    ---------------------------------------------------------------------------
+   --  procedure Append_Value:
+   --
+   --  Exceptions:
+   --    Constraint_Error - when the number of data points exceeds the
+   --                       declared limit.
+
+   procedure Append_Value (Target : in out Object;
+                           Value  : in     Data) is
+   begin
+      Target :=
+        (Count               => Target.Count + 1,
+         Sum_Of_Data         => Target.Sum_Of_Data + Value,
+         Sum_Of_Squared_Data => Target.Sum_Of_Squared_Data + Squared (Value));
+   end Append_Value;
+
+   ---------------------------------------------------------------------------
    --  function Mean:
 
    function Mean (Item : in     Object) return Data is
@@ -97,6 +78,44 @@ package body Generic_Statistics is
          return Item.Sum_Of_Data / Item.Count;
       end if;
    end Mean;
+
+   ---------------------------------------------------------------------------
+   --  function Number_Of_Values:
+
+   function Number_Of_Values (Item : in     Object) return Count_Range is
+      pragma Inline (Number_Of_Values);
+   begin
+      return Item.Count;
+   end Number_Of_Values;
+
+   ---------------------------------------------------------------------------
+   --  procedure Remove_Value:
+   --
+   --  Exceptions:
+   --    Constraint_Error - when the number of data points is 0.
+
+   procedure Remove_Value (Target : in out Object;
+                           Value  : in     Data) is
+   begin
+      if Target.Count < 1 then
+         raise Not_Enough_Data_Points;
+      else
+         Target :=
+           (Count               => Target.Count - 1,
+            Sum_Of_Data         => Target.Sum_Of_Data - Value,
+            Sum_Of_Squared_Data => Target.Sum_Of_Squared_Data -
+                                     Squared (Value));
+      end if;
+   end Remove_Value;
+
+   ---------------------------------------------------------------------------
+   --  function Standard_Deviation:
+
+   function Standard_Deviation (Item : in     Object) return Data is
+      pragma Inline (Standard_Deviation);
+   begin
+      return Square_Root (Variance (Item));
+   end Standard_Deviation;
 
    ---------------------------------------------------------------------------
    --  function Variance:
@@ -112,24 +131,6 @@ package body Generic_Statistics is
              / (Item.Count * (Item.Count - 1));
       end if;
    end Variance;
-
-   ---------------------------------------------------------------------------
-   --  function Standard_Deviation:
-
-   function Standard_Deviation (Item : in     Object) return Data is
-      pragma Inline (Standard_Deviation);
-   begin
-      return Square_Root (Variance (Item));
-   end Standard_Deviation;
-
-   ---------------------------------------------------------------------------
-   --  function Number_Of_Values:
-
-   function Number_Of_Values (Item : in     Object) return Count_Range is
-      pragma Inline (Number_Of_Values);
-   begin
-      return Item.Count;
-   end Number_Of_Values;
 
    ---------------------------------------------------------------------------
 

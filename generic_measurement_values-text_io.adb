@@ -18,108 +18,12 @@
 ------------------------------------------------------------------------------
 --  Standard packages:
 
-with Ada.Characters.Handling;
-with Ada.Characters.Latin_1;
-
-------------------------------------------------------------------------------
---  Other packages:
-
-------------------------------------------------------------------------------
+with Ada.Characters.Handling,
+     Ada.Characters.Latin_1;
 
 package body Generic_Measurement_Values.Text_IO is
 
-   ---------------------------------------------------------------------------
-
    package Scalar_Text_IO is new Ada.Text_IO.Float_IO (Scalar);
-
-   ---------------------------------------------------------------------------
-
-   procedure Put (File : in     Ada.Text_IO.File_Type;
-                  Item : in     Measurement;
-                  Fore : in     Ada.Text_IO.Field := Default_Fore;
-                  Aft  : in     Ada.Text_IO.Field := Default_Aft;
-                  Exp  : in     Ada.Text_IO.Field := Default_Exp) is
-      use Ada.Text_IO;
-      use Scalar_Text_IO;
-   begin
-      case Item.As is
-         when Below =>
-            Put (File => File,
-                 Item => '<');
-            Put (File => File,
-                 Item => Item.Value,
-                 Fore => Fore,
-                 Aft  => Aft,
-                 Exp  => Exp);
-         when Exact =>
-            Put (File => File,
-                 Item => Item.Value,
-                 Fore => Fore,
-                 Aft  => Aft,
-                 Exp  => Exp);
-         when Above =>
-            Put (File => File,
-                 Item => '>');
-            Put (File => File,
-                 Item => Item.Value,
-                 Fore => Fore,
-                 Aft  => Aft,
-                 Exp  => Exp);
-         when Undefined =>
-            Put (File => File,
-                 Item => "N/A");
-      end case;
-   end Put;
-
-   procedure Put (Item : in     Measurement;
-                  Fore : in     Ada.Text_IO.Field := Default_Fore;
-                  Aft  : in     Ada.Text_IO.Field := Default_Aft;
-                  Exp  : in     Ada.Text_IO.Field := Default_Exp) is
-   begin
-      Put (File => Ada.Text_IO.Standard_Output,
-           Item => Item,
-           Fore => Fore,
-           Aft  => Aft,
-           Exp  => Exp);
-   end Put;
-
-   ---------------------------------------------------------------------------
-
-   procedure Put (File : in     Ada.Text_IO.File_Type;
-                  Item : in     Measurement_Array;
-                  Fore : in     Ada.Text_IO.Field := Default_Fore;
-                  Aft  : in     Ada.Text_IO.Field := Default_Aft;
-                  Exp  : in     Ada.Text_IO.Field := Default_Exp) is
-      use Ada.Characters.Latin_1;
-      use Ada.Text_IO;
-   begin
-      for Index in Item'Range loop
-         if Index > Item'First then
-            Put (File => File,
-                 Item => HT);
-         end if;
-
-         Put (File => File,
-              Item => Item (Index),
-              Fore => Fore,
-              Aft  => Aft,
-              Exp  => Exp);
-      end loop;
-   end Put;
-
-   procedure Put (Item : in     Measurement_Array;
-                  Fore : in     Ada.Text_IO.Field := Default_Fore;
-                  Aft  : in     Ada.Text_IO.Field := Default_Aft;
-                  Exp  : in     Ada.Text_IO.Field := Default_Exp) is
-   begin
-      Put (File => Ada.Text_IO.Standard_Output,
-           Item => Item,
-           Fore => Fore,
-           Aft  => Aft,
-           Exp  => Exp);
-   end Put;
-
-   ---------------------------------------------------------------------------
 
    procedure Get (File : in     Ada.Text_IO.File_Type;
                   Item :    out Measurement) is
@@ -131,7 +35,7 @@ package body Generic_Measurement_Values.Text_IO is
       Number         : Scalar;
       Not_Applicable : String := "N/A";
    begin
-  Skip_Whitespace:
+      Skip_Whitespace :
       loop
          Look_Ahead (File        => File,
                      Item        => Buffer,
@@ -184,8 +88,6 @@ package body Generic_Measurement_Values.Text_IO is
            Item => Item);
    end Get;
 
-   ---------------------------------------------------------------------------
-
    procedure Get (File : in     Ada.Text_IO.File_Type;
                   Item :    out Measurement_Array) is
    begin
@@ -198,8 +100,6 @@ package body Generic_Measurement_Values.Text_IO is
          exception
             when Ada.Text_IO.End_Error =>
                Item (Index) := (As => Undefined);
-            when others =>
-               raise;
          end;
       end loop;
    end Get;
@@ -210,6 +110,87 @@ package body Generic_Measurement_Values.Text_IO is
            Item => Item);
    end Get;
 
-   ---------------------------------------------------------------------------
+   procedure Put (File : in     Ada.Text_IO.File_Type;
+                  Item : in     Measurement;
+                  Fore : in     Ada.Text_IO.Field := Default_Fore;
+                  Aft  : in     Ada.Text_IO.Field := Default_Aft;
+                  Exp  : in     Ada.Text_IO.Field := Default_Exp) is
+      use Ada.Text_IO;
+      use Scalar_Text_IO;
+   begin
+      case Item.As is
+         when Below =>
+            Put (File => File,
+                 Item => '<');
+            Put (File => File,
+                 Item => Item.Value,
+                 Fore => Fore,
+                 Aft  => Aft,
+                 Exp  => Exp);
+         when Exact =>
+            Put (File => File,
+                 Item => Item.Value,
+                 Fore => Fore,
+                 Aft  => Aft,
+                 Exp  => Exp);
+         when Above =>
+            Put (File => File,
+                 Item => '>');
+            Put (File => File,
+                 Item => Item.Value,
+                 Fore => Fore,
+                 Aft  => Aft,
+                 Exp  => Exp);
+         when Undefined =>
+            Put (File => File,
+                 Item => "N/A");
+      end case;
+   end Put;
+
+   procedure Put (Item : in     Measurement;
+                  Fore : in     Ada.Text_IO.Field := Default_Fore;
+                  Aft  : in     Ada.Text_IO.Field := Default_Aft;
+                  Exp  : in     Ada.Text_IO.Field := Default_Exp) is
+   begin
+      Put (File => Ada.Text_IO.Standard_Output,
+           Item => Item,
+           Fore => Fore,
+           Aft  => Aft,
+           Exp  => Exp);
+   end Put;
+
+   procedure Put (File : in     Ada.Text_IO.File_Type;
+                  Item : in     Measurement_Array;
+                  Fore : in     Ada.Text_IO.Field := Default_Fore;
+                  Aft  : in     Ada.Text_IO.Field := Default_Aft;
+                  Exp  : in     Ada.Text_IO.Field := Default_Exp) is
+      use Ada.Characters.Latin_1;
+      use Ada.Text_IO;
+   begin
+      for Index in Item'Range loop
+         if Index > Item'First then
+            Put (File => File,
+                 Item => HT);
+         end if;
+
+         Put (File => File,
+              Item => Item (Index),
+              Fore => Fore,
+              Aft  => Aft,
+              Exp  => Exp);
+      end loop;
+   end Put;
+
+   procedure Put (Item : in     Measurement_Array;
+                  Fore : in     Ada.Text_IO.Field := Default_Fore;
+                  Aft  : in     Ada.Text_IO.Field := Default_Aft;
+                  Exp  : in     Ada.Text_IO.Field := Default_Exp) is
+   begin
+      Put (File => Ada.Text_IO.Standard_Output,
+           Item => Item,
+           Fore => Fore,
+           Aft  => Aft,
+           Exp  => Exp);
+   end Put;
 
 end Generic_Measurement_Values.Text_IO;

@@ -56,7 +56,7 @@ package Generic_Rectangular_Vectors is
                  Right : in Scalar) return Vector;
 
    ---------------------------------------------------------------------------
-   -- Operations with Point result:
+   --  Operations with Point result:
 
    function "+" (Left  : in Point;
                  Right : in Vector) return Point;

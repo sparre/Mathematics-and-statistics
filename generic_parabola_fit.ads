@@ -26,23 +26,11 @@ generic
 
 package Generic_Parabola_Fit is
 
-   ---------------------------------------------------------------------------
-   --  Window_Width:
-
    Window_Width : constant Positive := 2 * Half_Window + 1;
 
-   ---------------------------------------------------------------------------
-   --  type Data_Array:
-
-   type Data_Array is array (- Half_Window .. + Half_Window) of Scalar;
-
-   ---------------------------------------------------------------------------
-   --  type Weight_Array:
+   type Data_Array is array (-Half_Window .. +Half_Window) of Scalar;
 
    type Weight_Array is array (0 .. 2) of Scalar;
-
-   ---------------------------------------------------------------------------
-   --  function Fit:
 
    function Fit (Data : in Data_Array) return Weight_Array;
 

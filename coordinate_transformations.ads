@@ -2,8 +2,10 @@ package Coordinate_Transformations is
 
    type Angle_In_Degrees is delta 0.000_000_009 -- 1 mm resolution
                             range -360.0 .. +360.0;
-   subtype Longitude is Angle_In_Degrees range -180.0 .. +180.0; --  East positive, west negative.
-   subtype Latitude  is Angle_In_Degrees range  -90.0 ..  +90.0; --  North positive, south negative.
+   subtype Longitude is Angle_In_Degrees range -180.0 .. +180.0;
+   --  East positive, west negative.
+   subtype Latitude  is Angle_In_Degrees range  -90.0 ..  +90.0;
+   --  North positive, south negative.
 
    type Geographical_Position is
       record

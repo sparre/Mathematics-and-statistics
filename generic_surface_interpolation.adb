@@ -32,11 +32,13 @@ package body Generic_Surface_Interpolation is
                           Min, Max     : in     Point_2D;
                           Height_Field :    out Height_Field_Type) is
 
-      ------------------------------------------------------------------------
-      --  procedure Adjust:
-      --
+      procedure Adjust (X, Y : in Integer);
       --  Sets the height of a point to be the average value of the heights of
       --  the neighbouring points.
+
+      function X (Point : in Point_3D) return Integer;
+      function Y (Point : in Point_3D) return Integer;
+      --  Calculates X and Y indices from 3D points.
 
       procedure Adjust (X, Y : in Integer) is
          Sum   : Scalar := 0.0;
@@ -60,31 +62,19 @@ package body Generic_Surface_Interpolation is
          end if;
       end Adjust;
 
-      ------------------------------------------------------------------------
-      --  function X:
-      --
-      --  ...
-
       X_Multiplier : constant Scalar :=
         Scalar (Height_Field'Length (1) - 1) / (Max (1) - Min (1));
 
       function X (Point : in Point_3D) return Integer is
-
       begin
          return Integer ((Point (1) - Min (1)) * X_Multiplier)
                   + Height_Field'First (1);
       end X;
 
-      ------------------------------------------------------------------------
-      --  function Y:
-      --
-      --  ...
-
       Y_Multiplier : constant Scalar :=
         Scalar (Height_Field'Length (2) - 1) / (Max (2) - Min (2));
 
       function Y (Point : in Point_3D) return Integer is
-
       begin
          return Integer ((Point (2) - Min (2)) * Y_Multiplier)
                   + Height_Field'First (2);
@@ -96,7 +86,7 @@ package body Generic_Surface_Interpolation is
                                       Height_Field'Range (2));
 
    begin --  Interpolate
-      --Height_Field := (others => (others => 0.0));
+      --  Height_Field := (others => (others => 0.0));
       Locked_Heights := (others => (others => False));
 
       for Index in Points'Range loop

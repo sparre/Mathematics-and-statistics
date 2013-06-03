@@ -67,7 +67,7 @@ procedure Test_Surface_Interpolation is
 
 begin
 
-Read_Data_Points:
+   Read_Data_Points :
    loop
       exit Read_Data_Points when End_Of_File (Standard_Input);
       exit Read_Data_Points when Point_Count = Points'Last;
@@ -120,7 +120,7 @@ Read_Data_Points:
          end loop;
       end loop;
 
-      --for Index in 0 .. Positive (X_Size + Y_Size) loop
+      --  for Index in 0 .. Positive (X_Size + Y_Size) loop
       for Index in 1 .. 10 loop
          Interpolate (Points       => Points (Points'First .. Point_Count),
                       Min          => Min,

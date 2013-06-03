@@ -19,10 +19,11 @@ package body Coordinate_Transformations is
       Sin_Orientation := Meters (Sin (Angle, Cycle => 360.0));
    end Set;
 
-   function To_Local (From : Geographical_Position) return Euclidian_Position is
+   function To_Local (From : Geographical_Position)
+                     return Euclidian_Position is
       Local : Euclidian_Position;
    begin
-      Local := (X => Meters ((From.Lon - Origo.Lon) * Degree_To_Meter) 
+      Local := (X => Meters ((From.Lon - Origo.Lon) * Degree_To_Meter)
                        * Meters (Origo_Scale),
                 Y => Meters ((From.Lat - Origo.Lat) * Degree_To_Meter));
       return (X => Cos_Orientation * Local.X + Sin_Orientation * Local.Y,

@@ -14,10 +14,8 @@
 ------------------------------------------------------------------------------
 --  Standard packages:
 
-with Ada.Characters.Latin_1;
-with Ada.Numerics.Generic_Elementary_Functions;
-with Ada.Integer_Text_IO;
-with Ada.Text_IO;
+with Ada.Integer_Text_IO,
+     Ada.Text_IO;
 
 ------------------------------------------------------------------------------
 --  Numerical Recipes packages:
@@ -53,11 +51,12 @@ procedure Test_Students_T_Test is
    use Scalar_Text_IO;
    use T_Test;
 
-   Data : array (1 .. 5) of Scalar_Array (1 .. 3) := ((0.0, 0.1, -0.1),
-                                                      (0.1, 1.1, -0.9),
-                                                      (1.0, 0.9,  0.8),
-                                                      (0.9, 0.8,  0.7),
-                                                      (0.5, 0.7,  0.6));
+   Data : constant array (1 .. 5) of Scalar_Array (1 .. 3) :=
+            ((0.0, 0.1, -0.1),
+             (0.1, 1.1, -0.9),
+             (1.0, 0.9,  0.8),
+             (0.9, 0.8,  0.7),
+             (0.5, 0.7,  0.6));
    P_A_High, P_B_High : Scalar;
    P_Value            : Probability;
    Mean_A, Mean_B     : Scalar;

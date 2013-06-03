@@ -34,104 +34,63 @@ generic
 
    Zero : Data;
 
-   with function "+" (Left, Right : in     Data'Base) return Data'Base;
+   with function "+" (Left, Right : in     Data) return Data;
 
-   with function "-" (Left, Right : in     Data'Base) return Data'Base;
+   with function "-" (Left, Right : in     Data) return Data;
 
-   with function "/" (Left  : in     Data'Base;
-                      Right : in     Positive) return Data'Base;
+   with function "/" (Left  : in     Data;
+                      Right : in     Positive) return Data;
 
-   with function Squared (Item : in     Data'Base) return Squared_Data'Base;
+   with function Squared (Item : in     Data) return Squared_Data;
 
-   with function "+" (Left, Right : in     Squared_Data'Base)
-     return Squared_Data'Base;
+   with function "+" (Left, Right : in     Squared_Data) return Squared_Data;
 
-   with function "-" (Left, Right : in     Squared_Data'Base)
-     return Squared_Data'Base;
+   with function "-" (Left, Right : in     Squared_Data) return Squared_Data;
 
    with function "*" (Left  : in     Positive;
-                      Right : in     Squared_Data'Base)
-     return Squared_Data'Base;
+                      Right : in     Squared_Data) return Squared_Data;
 
-   with function "/" (Left  : in     Squared_Data'Base;
-                      Right : in     Positive) return Squared_Data'Base;
+   with function "/" (Left  : in     Squared_Data;
+                      Right : in     Positive) return Squared_Data;
 
-   with function Square_Root (Item : in Squared_Data'Base) return Data'Base;
+   with function Square_Root (Item : in Squared_Data) return Data;
 
 package Generic_Statistics is
-
-   ---------------------------------------------------------------------------
-   --  type Object:
 
    type Object is private;
 
    Null_Object : constant Object;
 
-   ---------------------------------------------------------------------------
-   --  subtype Count_Range:
-
    subtype Count_Range is Natural range 0 .. Maximum_Number_Of_Data_Points;
-
-   ---------------------------------------------------------------------------
-   --  Exceptions:
 
    Not_Enough_Data_Points : exception;
 
-   ---------------------------------------------------------------------------
-   --  procedure Append_Value:
-   --
+   procedure Append_Value (Target : in out Object;
+                           Value  : in     Data);
    --  Exceptions:
    --    Constraint_Error - when the number of data points exceeds the
    --                       declared limit.
-
-   procedure Append_Value (Target : in out Object;
-                           Value  : in     Data);
-
-   ---------------------------------------------------------------------------
-   --  procedure Remove_Value:
-   --
-   --  Exceptions:
-   --    Constraint_Error - when the number of data points is 0.
 
    procedure Remove_Value (Target : in out Object;
                            Value  : in     Data);
+   --  Exceptions:
+   --    Constraint_Error - when the number of data points is 0.
 
-   ---------------------------------------------------------------------------
-   --  procedure Append:
-   --
+   procedure Append (Target : in out Object;
+                     Source : in     Object);
    --  Exceptions:
    --    Constraint_Error - when the number of data points exceeds the
    --                       declared limit.
 
-   procedure Append (Target : in out Object;
-                     Source : in     Object);
-
-   ---------------------------------------------------------------------------
-   --  function Mean:
-
    function Mean (Item : in     Object) return Data;
-
-   ---------------------------------------------------------------------------
-   --  function Variance:
 
    function Variance (Item : in     Object) return Squared_Data;
 
-   ---------------------------------------------------------------------------
-   --  function Standard_Deviation:
-
    function Standard_Deviation (Item : in     Object) return Data;
-
-   ---------------------------------------------------------------------------
-   --  function Number_Of_Values:
 
    function Number_Of_Values (Item : in     Object) return Count_Range;
 
-   ---------------------------------------------------------------------------
-
 private
-
-   ---------------------------------------------------------------------------
-   --  type Object:
 
    type Object is
       record
@@ -143,7 +102,5 @@ private
    Null_Object : constant Object := (Count               => 0,
                                      Sum_Of_Data         => Zero,
                                      Sum_Of_Squared_Data => Squared (Zero));
-
-   ---------------------------------------------------------------------------
 
 end Generic_Statistics;

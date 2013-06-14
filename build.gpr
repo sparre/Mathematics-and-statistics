@@ -1,5 +1,7 @@
 --  O mighty Emacs, please use -*- Ada -*- mode in this lowly file.
 
+with "ada_2005";
+
 project Build is
    for Main use ("mean_and_variance",
                  "test_betai",
@@ -14,18 +16,5 @@ project Build is
       for Default_Switches ("Ada") use ("-m");
    end Builder;
 
-   package Compiler is
-      for Default_Switches ("Ada") use ("-fstack-check",
-                                        "-gnata",
-                                        "-gnatE",
-                                        "-gnatf",
-                                        "-gnato",
-                                        "-gnatv",
-                                        "-gnatwa",
-                                        "-gnaty3abcdefhiklmnoprstux",
-                                        "-Wall",
-                                        "-O2",
-                                        "-gnatn",
-                                        "-gnat2005");
-   end Compiler;
+   package Compiler renames Ada_2005.Compiler;
 end Build;

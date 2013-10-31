@@ -9,6 +9,8 @@ use
 procedure Test_Coordinate_Transformations is
    Pos : Euclidian_Position;
 begin
+   pragma Warnings (Off);
+
    Set (Origo => (Lon => +12.08, Lat => +56.01));
 
    Pos := To_Local (From => (Lon => +12.08, Lat => +56.01));

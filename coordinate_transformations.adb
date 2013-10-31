@@ -2,7 +2,9 @@ with Ada.Numerics.Elementary_Functions;
 
 package body Coordinate_Transformations is
 
+   pragma Warnings (Off);
    Degree_To_Meter : constant Meters := 1.0e7 / 90.0;
+   pragma Warnings (On);
 
    procedure Set (Origo : Geographical_Position) is
       use Ada.Numerics.Elementary_Functions;

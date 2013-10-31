@@ -8,6 +8,8 @@ all: whitespace-check
 install: all
 	install --target=$(DESTDIR)/usr/local/bin $(APPLICATIONS)
 
+test:
+
 clean:
 	rm -f *.o *.ali
 

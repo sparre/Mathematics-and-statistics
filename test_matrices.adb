@@ -49,26 +49,6 @@ procedure Test_Matrices is
       Pattern    : in     String;
       Replace_By : in     String);
 
-   procedure Search_And_Replace
-     (Source     : in out Ada.Strings.Unbounded.Unbounded_String;
-      Pattern    : in     String;
-      Replace_By : in     String) is
-      Location   : Natural;
-   begin --  Search_And_Replace
-      loop
-         Location := Ada.Strings.Unbounded.Index (Source  => Source,
-                                                  Pattern => Pattern);
-
-         exit when Location = 0;
-
-         Ada.Strings.Unbounded.Replace_Slice
-           (Source => Source,
-            Low    => Location,
-            High   => Location - 1 + Pattern'Length,
-            By     => Replace_By);
-      end loop;
-   end Search_And_Replace;
-
    ---------------------------------------------------------------------------
    --  package Matrices:
 
@@ -98,9 +78,10 @@ procedure Test_Matrices is
                                                      Matrices    => Matrices);
 
    ---------------------------------------------------------------------------
-   --  procedure Put_Line:
 
    procedure Put_Line (Item : in     Matrix);
+
+   ---------------------------------------------------------------------------
 
    procedure Put_Line (Item : in     Matrix) is
       use Ada.Strings.Unbounded;
@@ -113,6 +94,26 @@ procedure Test_Matrices is
                           Replace_By => ";" & Latin_1.LF & " (");
       Ada.Strings.Unbounded.Text_IO.Put_Line (Buffer);
    end Put_Line;
+
+   procedure Search_And_Replace
+     (Source     : in out Ada.Strings.Unbounded.Unbounded_String;
+      Pattern    : in     String;
+      Replace_By : in     String) is
+      Location   : Natural;
+   begin
+      loop
+         Location := Ada.Strings.Unbounded.Index (Source  => Source,
+                                                  Pattern => Pattern);
+
+         exit when Location = 0;
+
+         Ada.Strings.Unbounded.Replace_Slice
+           (Source => Source,
+            Low    => Location,
+            High   => Location - 1 + Pattern'Length,
+            By     => Replace_By);
+      end loop;
+   end Search_And_Replace;
 
    ---------------------------------------------------------------------------
    --  Unit matrix:

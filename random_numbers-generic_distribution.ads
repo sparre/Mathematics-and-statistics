@@ -1,16 +1,3 @@
-------------------------------------------------------------------------------
---
---  generic package Random_Numbers.Generic_Distribution (spec)
---
-------------------------------------------------------------------------------
---  Update information:
---
---  1998.04.05 (Jacob Sparre Andersen)
---    Written.
---
---  (Insert additional update information above this line.)
-------------------------------------------------------------------------------
-
 generic
 
    with function Distribution (X : in Float) return Float;
@@ -20,16 +7,10 @@ generic
 
 package Random_Numbers.Generic_Distribution is
 
-   ---------------------------------------------------------------------------  
-   --  procedure Reset:
-
-   procedure Reset;
-
-   ---------------------------------------------------------------------------
-   --  function Random:
+   procedure Reset renames Random_Numbers.Reset;
+   --  Reset global generator.
 
    function Random return Float;
-
-   ---------------------------------------------------------------------------
+   --  Draw from the specified distribution.
 
 end Random_Numbers.Generic_Distribution;

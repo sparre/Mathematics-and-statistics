@@ -4,6 +4,7 @@ with "ada_2005";
 
 project Build is
    for Main use ("mean_and_variance",
+                 "random_numbers-generic_distribution",
                  "test_betai",
                  "test_coordinate_transformations",
                  "test_floating_point_statistics",

@@ -1,6 +1,3 @@
-with
-  Ada.Numerics.Float_Random;
-
 package body Random_Numbers.Generic_Distribution is
 
    ---------------------------------------------------------------------------
@@ -16,8 +13,6 @@ package body Random_Numbers.Generic_Distribution is
    ---------------------------------------------------------------------------
 
    function Random return Float is
-      use Ada.Numerics.Float_Random;
-
       Uniform : Float;
    begin
       Uniform := Random_Numbers.Uniform * Integral (Integral'Last);

@@ -21,18 +21,6 @@ package body Random_Numbers is
 
    ---------------------------------------------------------------------------
 
-   procedure Reset is
-      use Ada.Numerics.Float_Random;
-   begin
-      Reset (Uniform_Distribution);
-   end Reset;
-
-   function Uniform return Float is
-      use Ada.Numerics.Float_Random;
-   begin
-      return Random (Uniform_Distribution);
-   end Uniform;
-
    function Gauss return Float is
       use Ada.Numerics.Float_Random;
 
@@ -44,5 +32,17 @@ package body Random_Numbers is
 
       return GaussFac * Sum - GaussAdd;
    end Gauss;
+
+   procedure Reset is
+      use Ada.Numerics.Float_Random;
+   begin
+      Reset (Uniform_Distribution);
+   end Reset;
+
+   function Uniform return Float is
+      use Ada.Numerics.Float_Random;
+   begin
+      return Random (Uniform_Distribution);
+   end Uniform;
 
 end Random_Numbers;

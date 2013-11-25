@@ -67,6 +67,15 @@ procedure Test_Surface_Interpolation is
 
 begin
 
+   Testing :
+   declare
+      use Ada.Command_Line;
+   begin
+      if Argument_Count = 1 and then Argument (1) = "--no-test" then
+         return;
+      end if;
+   end Testing;
+
    Read_Data_Points :
    loop
       exit Read_Data_Points when End_Of_File (Standard_Input);

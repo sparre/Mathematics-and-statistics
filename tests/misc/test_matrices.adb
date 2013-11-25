@@ -19,6 +19,7 @@
 --  Standard packages:
 
 with Ada.Characters.Latin_1,
+     Ada.Command_Line,
      Ada.Float_Text_IO,
      Ada.Strings.Unbounded,
      Ada.Strings.Unbounded.Text_IO,
@@ -136,7 +137,7 @@ procedure Test_Matrices is
 
    use Ada.Strings.Unbounded, Ada.Text_IO;
 
-begin --  Test_Matrices
+begin
    Put_Line ("1 = ");
    Put_Line (Unit_Matrix);
    Put_Line ("A = ");
@@ -186,6 +187,17 @@ begin --  Test_Matrices
 
    Put_Line ("A^{-1} = ");
    Put_Line (A);
+
+   ---------------------------------------------------------------------------
+   --  No input data:
+
+   declare
+      use Ada.Command_Line;
+   begin
+      if Argument_Count = 1 and then Argument (1) = "--no-input-data" then
+         return;
+      end if;
+   end;
 
    ---------------------------------------------------------------------------
    --  Parabola fit:

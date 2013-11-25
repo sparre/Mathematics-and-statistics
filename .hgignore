@@ -1,19 +1,37 @@
-# use glob syntax.
 syntax: glob
 
-*.o
-*.ali
+# Temporary files from editors:
 *~
-b__*.ads
-b__*.adb
-b~*.ads
-b~*.adb
+.\#*
+\#*\#
+.*.swp
 
-test_betai
-test_coordinate_transformations
-test_floating_point_statistics
-test_students_t_test
-test_students_t_test_on_measurements
-test_surface_interpolation
-mean_and_variance
-test_matrices
+# Output from tests:
+tests/build.status
+tests/run.status
+tests/*/*.errors
+tests/*/*.output
+
+# Generated test executables:
+tests/misc/test_betai
+tests/misc/test_coordinate_transformations
+tests/misc/test_floating_point_statistics
+tests/misc/test_students_t_test
+tests/misc/test_students_t_test_on_measurements
+tests/misc/test_surface_interpolation
+tests/misc/test_matrices
+
+# Test output to clean up:
+
+# Output from source text metric analysis:
+obj/*.ad[sb].metrix
+
+# Generated source files:
+
+# Generated object files:
+obj/*.ali
+obj/*.o
+
+# Generated executables:
+bin/mean_and_variance
+

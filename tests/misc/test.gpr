@@ -1,11 +1,11 @@
 --  O mighty Emacs, please use -*- Ada -*- mode in this lowly file.
 
-with "ada_2005";
+with "../../ada_2005";
 
-project Build is
-   for Main use ("mean_and_variance",
-                 "random_numbers-generic_distribution",
-                 "test_betai",
+project Test is
+   for Source_Dirs use ("../../src/", ".");
+
+   for Main use ("test_betai",
                  "test_coordinate_transformations",
                  "test_floating_point_statistics",
                  "test_matrices",
@@ -13,9 +13,9 @@ project Build is
                  "test_students_t_test_on_measurements",
                  "test_surface_interpolation");
 
-   package Builder is
-      for Default_Switches ("Ada") use ("-m");
-   end Builder;
-
+   package Builder  renames Ada_2005.Builder;
    package Compiler renames Ada_2005.Compiler;
-end Build;
+
+   for Object_Dir use "../../obj/";
+   for Exec_Dir   use ".";
+end Test;

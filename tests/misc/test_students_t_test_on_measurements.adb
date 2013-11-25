@@ -107,4 +107,7 @@ begin
            Exp  => 0);
       New_Line;
    end loop;
+exception
+   when End_Error =>
+      null;
 end Test_Students_T_Test_On_Measurements;

@@ -1,24 +1,36 @@
-APPLICATIONS=mean_and_variance
-TEST_EXECUTABLES=test_betai test_coordinate_transformations test_floating_point_statistics test_students_t_test test_students_t_test_on_measurements test_surface_interpolation
-EXECUTABLES=$(APPLICATIONS) $(TEST_EXECUTABLES)
+include Makefile.project
+-include .config
 
-all: whitespace-check
-	gnatmake -P build.gpr
+EXECUTABLES=$(GENERATED_EXECUTABLES) $(SCRIPTS)
 
-install: all
-	install --target=$(DESTDIR)/usr/local/bin $(APPLICATIONS)
+all: build metrics
 
-test:
+build: fix-whitespace $(GENERATED_SOURCES)
+	gnatmake -p -P $(PROJECT)
+
+test: build metrics
+	@./tests/build
+	@./tests/run
+
+install: build test
+	install -t ${HOME}/bin/ $(EXECUTABLES)
 
 clean:
-	rm -f *.o *.ali
+	gnatclean -P $(PROJECT)
+	find . -name "*~" -type f -print0 | xargs -0 -r /bin/rm
+	rm -f **/*.o **/*.ali
+	if [ ! -z "$(GENERATED_SOURCES)" ]; then rm -f $(GENERATED_SOURCES); fi
+	rmdir bin || true
+	rmdir obj || true
 
 distclean: clean
-	rm -f $(EXECUTABLES)
-
-whitespace-check:
-	@if find -name '*.ad?' | xargs egrep -l '	| $$' | egrep -v '(^|/)b([~]|__)'; then echo "Please remove tabs and end-of-line spaces from the source files listed above."; echo "You can do it by running:"; echo "   make -C '`pwd`' fix-whitespace"; false; fi
+	rm -f $(GENERATED_EXECUTABLES)
+	rmdir bin || true
+	rmdir obj || true
 
 fix-whitespace:
-	@   find -name '*.ad?' | xargs egrep -l '	| $$' | egrep -v '(^|/)b([~]|__)' | xargs --no-run-if-empty perl -i -lpe 's|	|        |g; s| +$$||g'
+	@find src tests -name '*.ad?' | xargs --no-run-if-empty egrep -l '	| $$' | grep -v '^b[~]' | xargs --no-run-if-empty perl -i -lpe 's|	|        |g; s| +$$||g'
+
+metrics:
+	@gnat metric -P $(PROJECT)
 

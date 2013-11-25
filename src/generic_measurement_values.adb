@@ -26,6 +26,8 @@ package body Generic_Measurement_Values is
 
    function "+" (Left  : in Measurement;
                  Right : in Measurement) return Measurement is
+      --  Excessive cyclomatic complexity:
+      --  Would a look-up table be easier to understand?
    begin
       case Left.As is
          when Below =>
@@ -125,6 +127,8 @@ package body Generic_Measurement_Values is
 
    function "-" (Left  : in Measurement;
                  Right : in Measurement) return Measurement is
+      --  Excessive cyclomatic complexity:
+      --  Would a look-up table be easier to understand?
    begin
       case Left.As is
          when Below =>

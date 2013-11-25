@@ -18,6 +18,8 @@
 
 procedure Generic_Gauss_Jordan (A : in out Matrices.Matrix;
                                 B : in out Matrices.Matrix) is
+   --  Excessive cyclomatic complexity:
+   --  Direct transcription from "Numerical Recipes".
 
    use Matrices;
 

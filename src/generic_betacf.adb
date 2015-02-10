@@ -9,7 +9,7 @@ begin
    Qab := A + B;
    Qap := A + 1.0;
    Qam := A - 1.0;
-   Bz := 1.0 - Qab * X /Qap;
+   Bz := 1.0 - Qab * X / Qap;
 
    for M in 1 .. Itmax loop
       Em := Scalar (M);

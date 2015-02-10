@@ -45,12 +45,14 @@ package body Generic_Surface_Interpolation is
          Count : Natural := 0;
       begin
          if X in Height_Field'Range (1) and then
-            Y in Height_Field'Range (2) then
+            Y in Height_Field'Range (2)
+         then
 
             for dX in -1 .. +1 loop
                for dY in -1 .. +1 loop
                   if X + dX in Height_Field'Range (1) and then
-                     Y + dY in Height_Field'Range (2) then
+                     Y + dY in Height_Field'Range (2)
+                  then
 
                      Sum := Sum + Height_Field (X + dX, Y + dY);
                      Count := Count + 1;

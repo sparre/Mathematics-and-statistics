@@ -30,7 +30,8 @@ package body Generic_Least_Squares is
    begin --  Fit
       if x'First = y'First and then x'Last = y'Last
                            and then Basis'First = Weights'First
-                           and then Basis'Last = Weights'Last then
+                           and then Basis'Last = Weights'Last
+      then
          for i in x'Range loop
             for j in Basis'Range loop
                Set (A, i, j, Basis (j) (x (i)));

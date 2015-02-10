@@ -1,6 +1,7 @@
 PROJECT=mathematics_and_statistics
 
-GENERATED_EXECUTABLES=bin/mean_and_variance
+GENERATED_EXECUTABLES=bin/mean_and_variance \
+                      bin/number_of_combinations
 
 GENERATED_SOURCES=
 

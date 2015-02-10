@@ -34,4 +34,5 @@ obj/*.o
 
 # Generated executables:
 bin/mean_and_variance
+bin/number_of_combinations
 

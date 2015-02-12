@@ -27,6 +27,7 @@ tests/misc/test_matrices
 obj/*.ad[sb].metrix
 
 # Generated source files:
+src/mercurial.ads
 
 # Generated object files:
 obj/*.ali

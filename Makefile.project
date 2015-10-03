@@ -1,9 +1,14 @@
-PROJECT=mathematics_and_statistics
+PROJECT=Mathematics_And_Statistics
 
-GENERATED_EXECUTABLES=bin/mean_and_variance \
+GENERATED_EXECUTABLES=bin/$(LC_PROJECT)-demo \
+                      bin/mean_and_variance \
                       bin/number_of_combinations
 
-GENERATED_SOURCES=
+GENERATED_SOURCES=$(PROJECT_ROOT_SOURCE) \
+                  $(HG_STATE_SOURCE) \
+                  $(PROJECT_DEMO_SOURCE)
 
 SCRIPTS=
+
+TEST_OUTPUT=tests/results
 

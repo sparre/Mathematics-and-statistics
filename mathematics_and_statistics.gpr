@@ -8,7 +8,8 @@ project Mathematics_And_Statistics is
    for Main use ("mathematics_and_statistics-demo",
                  "mean_and_variance",
                  "number_of_combinations",
-                 "random_numbers-generic_distribution");
+                 "random_numbers-generic_distribution",
+                 "float_2d_vectors");
 
    package Builder  renames Ada_2005.Builder;
    package Compiler renames Ada_2005.Compiler;

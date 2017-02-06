@@ -9,6 +9,7 @@ project Mathematics_And_Statistics is
                  "mean_and_variance",
                  "number_of_combinations",
                  "random_numbers-generic_distribution",
+                 "fractions",
                  "float_2d_vectors");
 
    package Builder  renames Ada_2005.Builder;

@@ -36,6 +36,7 @@ obj/*.ali
 obj/*.o
 
 # Generated executables:
+bin/fractions
 bin/mathematics_and_statistics-demo
 bin/mean_and_variance
 bin/number_of_combinations

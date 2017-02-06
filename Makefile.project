@@ -1,6 +1,7 @@
 PROJECT=Mathematics_And_Statistics
 
 GENERATED_EXECUTABLES=bin/$(LC_PROJECT)-demo \
+                      bin/fractions \
                       bin/mean_and_variance \
                       bin/number_of_combinations
 

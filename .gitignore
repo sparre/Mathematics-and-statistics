@@ -23,9 +23,6 @@ tests/misc/test_matrices
 
 # Test output to clean up:
 
-# Output from source text metric analysis:
-obj/*.ad[sb].metrix
-
 # Generated source files:
 src/mathematics_and_statistics-demo.adb
 src/mathematics_and_statistics-mercurial.ads
@@ -36,6 +33,7 @@ obj/*.ali
 obj/*.o
 
 # Generated executables:
+bin/fractions
 bin/mathematics_and_statistics-demo
 bin/mean_and_variance
 bin/number_of_combinations

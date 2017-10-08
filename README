@@ -4,6 +4,14 @@ Mathematics and Statistics [1]
 Various packages for mathematics and statistics.
 
 
+Build dependencies
+------------------
+
++ GNU Make
++ GNAT
++ Perl
+
+
 Links:
 ------
 

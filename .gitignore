@@ -20,6 +20,7 @@ tests/misc/test_students_t_test
 tests/misc/test_students_t_test_on_measurements
 tests/misc/test_surface_interpolation
 tests/misc/test_matrices
+tests/misc/vector_examples
 
 # Test output to clean up:
 
@@ -29,8 +30,7 @@ src/mathematics_and_statistics-mercurial.ads
 src/mathematics_and_statistics.ads
 
 # Generated object files:
-obj/*.ali
-obj/*.o
+obj/
 
 # Generated executables:
 bin/fractions
